@@ -1,0 +1,30 @@
+<br>
+<br>
+<h1 class="position-absolute top-0 start-50 translate-middle-x">Detalles del chat</h1>
+<br>
+<br>
+<div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
+  <div class="card-header">Informacion</div>
+  <div class="card-body">
+    <p class="card-text">
+    
+    <p>
+<strong>Id del chat: </strong>
+<%= @message.chat_id %>
+</p>
+
+<p>
+<strong>Id del usuario: </strong>
+<%= @message.user_id %>
+</p>
+
+<p>
+<strong>Informacion: </strong>
+<%= @message.body %>
+</p>
+    <td>
+<%= link_to 'Volver', messages_path %>
+</td>
+    </p>
+  </div>
+  </div>

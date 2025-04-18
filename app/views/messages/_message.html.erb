@@ -1,0 +1,18 @@
+    <tr>
+        <td>
+    
+    <%= index + 1 %>
+    </td>
+      <td>
+      <%= message.chat_id %>
+      </td>
+      <td>
+      <%= message.user_id %>
+      </td>
+        <td>
+      <%= message.body %>
+      </td>
+      <td>
+        <%= link_to 'Ver', message_path(message) %>
+      </td>
+    </tr>
