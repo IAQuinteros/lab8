@@ -1,0 +1,14 @@
+<%= form_with model: @users do |form| %>
+    <div>
+    <%= form.label :firstname, "Nombre" %>
+    <%= form.text_field :firstname, placeholder: "Escribe aqui tu nombre" %>
+    </div>
+
+    <div>
+    <%= form.label :lastname, "Apelldio" %>
+    <%= form.text_field :lastname, placeholder: "Escribe aqui tu apellido" %>
+    </div>
+
+    <div>
+    <%= form.submit :button, "Guardar" %>
+    </div>
