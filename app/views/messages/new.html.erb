@@ -1,0 +1,51 @@
+<%= form_with(model: @message, local:true) do |f| %>
+<div>
+    <p>
+        <%= f.label :chat_id, "Chat asociado" %> <br>
+        <%= f.select :chat_id, Chat.includes(:sender, :receiver).map { |chat| ["chat ##{chat.id} (#{chat.sender.email} → #{chat.receiver.email})", chat.id]}, {}, {id: "chat-select"} %>
+    </p>
+
+    <p>
+        <%= f.label :user_id, "Usuario/Author" %> <br>
+        <%= f.select :user_id, [], {}, { id: "user-select"} %>
+    </p>
+
+        <p>
+        <%= f.label :body, "Mensaje" %> <br>
+        <%= f.text_area :body %>
+    </p>
+
+    <%= f.submit "Crear mensaje" %>
+</div>
+<% end %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function ( ){
+    const chatSelect = document.getElementById("chat-select");
+    const userSelect = document.getElementById("user-select");
+
+    function loadUser(chatId){
+        fetch(`/chats/${chatId}/users`)
+        .then(response => response.json())
+        .then(users=>{
+            userSelect.innerHTML = "";
+            users.forEach(user => {
+                const option = document.createElement("option");
+                option.value = user.id;
+                option.textContent = user.email;
+                userSelect.appendChild(option);
+            })
+        })
+    }
+    chatSelect.addEventListener("change", function(){
+        const chatId = this.value;
+        console.log('this-value->',this.value);
+        if(chatId){
+            loadUser(chatId);
+        }
+    })
+    if(chatSelect.value){
+        loadUser(chatSelect.value);
+    }
+})
+</script>

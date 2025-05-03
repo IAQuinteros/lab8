@@ -31,6 +31,6 @@ end
     Message.create!(
         chat_id: chat.id,
         user_id: user.id,
-        body: "Mensaje #{i + 1} del usuario #{user.firstname}:"
+        body: "Mensaje #{i + 1} del usuario #{user.firstname}"
     )
 end

@@ -1,0 +1,15 @@
+<%= form_with(model: @chat, local:true) do |f| %>
+<div>
+    <p>
+        <%= f.label :sender_id, "Remitente" %> <br>
+        <%= f.select :sender_id, User.all.map { |u| [u.email, u.id]} %>
+    </p>
+
+    <p>
+        <%= f.label :receiver_id, "Receptor" %> <br>
+        <%= f.select :receiver_id, User.all.map { |u| [u.email, u.id]} %>
+    </p>
+
+    <%= f.submit "Crear chat" %>
+</div>
+<% end %>
