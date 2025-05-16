@@ -14,7 +14,6 @@ class ChatsController < ApplicationController
 
     def create 
         @chat = Chat.new(chat_params)
-
         if @chat.save
             redirect_to chat_path(@chat), notice: "Chat creado exitosamente"
         else
@@ -22,20 +21,11 @@ class ChatsController < ApplicationController
         end
     end
 
-    def users
-        chat = Chat.find_by(id: params[:id])
-        
-        if chat
-            users = [
-                {id: chat.sender.id, email: chat.sender.email},
-                {id: chat.receiver.id, email: chat.receiver.email}
-
-            ]
-            render json: users
-        else 
-            render json: [], status: :not_found
-        end
-    end
+def users
+  chat = Chat.find(params[:id])
+  users = [chat.sender, chat.receiver]
+  render json: users.as_json(only: [:id, :firstname, :lastname, :email])
+end
 
     def edit
         @chat = Chat.find(params[:id])

@@ -1,24 +1,62 @@
- <div class="container mt-4">
- <div class="card text-bg-light mb-3 mx-auto" style="max-width: 28rem;">
-  <div class="card-header">Crear Mensaje</div>
-  <div class="card-body">
-    <p class="card-text">
-<%= form_with(model: @message, local:true) do |f| %>
-<div>
-    <p>
-        <strong><%= f.label :chat_id, "Chat asociado" %></strong> <br>
-        <%= f.select :chat_id, Chat.includes(:sender, :receiver).map { |chat| ["chat ##{chat.id} (#{chat.sender.email} → #{chat.receiver.email})", chat.id]}, {}, {id: "chat-select"} %>
-    </p>
+<div class="container mt-4">
+  <div class="card text-bg-light mb-3 mx-auto" style="max-width: 28rem;">
+    <div class="card-header">Crear mensaje</div>
+    <div class="card-body">
+      <%= form_with(model: @message, local: true) do |f| %>
+        <div>
+          <strong><%= f.label :chat_id, "Chat asociado" %></strong><br>
+          <%= f.select :chat_id, Chat.includes(:sender, :receiver).map { |chat| ["Chat ##{chat.id} (#{chat.sender.firstname} → #{chat.receiver.firstname})", chat.id] }, {}, { id: "chat-select", class: "form-select" } %>
+        </div>
 
-        <p>
-        <strong><%= f.label :body, "Mensaje" %> </strong><br>
-        <%= f.text_area :body %>
-    </p>
+        <br>
 
-    <%= f.submit "Crear mensaje", class: "btn btn-primary btn-sm" %>
-    <%= link_to 'Volver', messages_path, class: "btn btn-primary btn-sm" %>
+        <div>
+          <strong><%= f.label :user_id, "Usuario autor" %></strong><br>
+          <%= f.select :user_id, [], {}, { id: "user-select", class: "form-select" } %>
+        </div>
+
+        <br>
+
+        <div>
+          <strong><%= f.label :body, "Mensaje" %></strong><br>
+          <%= f.text_area :body, class: "form-control" %>
+        </div>
+
+        <br>
+
+        <%= f.submit "Crear mensaje", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<% end %>
-</p>
-</div>
-<div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const chatSelect = document.getElementById("chat-select");
+    const userSelect = document.getElementById("user-select");
+
+    function loadUsers(chatId) {
+      fetch(`/chats/${chatId}/users`)
+        .then(response => response.json())
+        .then(users => {
+          userSelect.innerHTML = "";
+          users.forEach(user => {
+            const option = document.createElement("option");
+            option.value = user.id;
+            option.textContent = user.firstname + " " + user.lastname;
+            userSelect.appendChild(option);
+          });
+        });
+    }
+
+    chatSelect.addEventListener("change", function () {
+      const chatId = this.value;
+      if (chatId) {
+        loadUsers(chatId);
+      }
+    });
+    if (chatSelect.value) {
+      loadUsers(chatSelect.value);
+    }
+  });
+</script>
