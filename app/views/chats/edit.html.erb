@@ -3,6 +3,16 @@
   <div class="card-header">Editar chat</div>
   <div class="card-body">
     <p class="card-text">
+    <% if @chat.errors.any? %>
+  <div class="alert alert-danger">
+    <h5>Errores al editar chat:</h5>
+    <ul>
+      <% @chat.errors.full_messages.each do |cht| %>
+        <li><%= cht %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <%= form_with(model: @chat, local: true) do |form| %>
     
     <div>

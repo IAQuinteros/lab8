@@ -6,7 +6,7 @@ class Chat < ApplicationRecord
 
     has_many :messages, dependent: :destroy
 
-    validates :sender_id, :receiver_id, presence: true
+    validates :sender_id, :receiver_id, presence: true, uniqueness: { scope: :receiver_id, message: "Ya tiene un chat con este usuario" }
     validate :sender_and_receiver_must_be_different
 
     private

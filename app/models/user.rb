@@ -4,8 +4,8 @@ class User < ApplicationRecord
     has_many :messages, dependent: :destroy
 
 
-    validates :email, presence: true,  uniqueness: true
-    validates :firstname, :lastname, presence: true
+    validates :email, presence: true,  uniqueness: { case_sensitive: false, message: "Ya está en uso" }, format: { with: URI::MailTo::EMAIL_REGEXP, message: "no tiene un formato válido" }
+    validates :firstname, :lastname, presence: true, length: { maximum: 25 }
 
     before_validation :normalize_name
     after_commit :log_creation

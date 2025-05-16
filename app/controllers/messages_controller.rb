@@ -31,7 +31,7 @@ class MessagesController < ApplicationController
         if @message.update(message_params)
             redirect_to @message, notice: "Mensaje actualizado correctamente."
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 

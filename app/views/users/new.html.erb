@@ -3,6 +3,16 @@
   <div class="card-header">Crear usuario</div>
   <div class="card-body">
     <p class="card-text">
+        <% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <h5>Errores al crear nuevo usuario:</h5>
+    <ul>
+      <% @user.errors.full_messages.each do |usr| %>
+        <li><%= usr %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <%= form_with(model: @user, local: true) do |form| %>
     <div>
     <strong> <%= form.label :firstname, "Nombre" %> </strong>

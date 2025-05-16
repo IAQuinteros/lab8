@@ -36,7 +36,7 @@ end
         if @chat.update(chat_params)
             redirect_to @chat, notice: "Chat actualizado correctamente."
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 
