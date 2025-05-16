@@ -6,13 +6,23 @@ class Chat < ApplicationRecord
 
     has_many :messages, dependent: :destroy
 
-    validates :sender_id, :receiver_id, presence: true, uniqueness: { scope: :receiver_id, message: "Ya tiene un chat con este usuario" }
-    validate :sender_and_receiver_must_be_different
+    validate :valid_chat_users
+
+
 
     private
+    def valid_chat_users
+        if sender_id == receiver_id
+            errors.add(:base, "No puedes crear un chat contigo mismo")
+        end
 
-    def sender_and_receiver_must_be_different
-        errors.add(:receiver_id, "No puede ser igual al sender") if sender_id == receiver_id
+        existing_chat = Chat.where(sender_id: sender_id, receiver_id: receiver_id)
+                            .or(Chat.where(sender_id: receiver_id, receiver_id: sender_id))
+                            .first
+
+        if existing_chat && existing_chat.id != self.id
+            errors.add(:base, "Ya existe un chat entre estos dos usuarios")
+        end
     end
 
 end
