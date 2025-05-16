@@ -1,18 +1,15 @@
     <tr>
-        <td>
-    
-    <%= index + 1 %>
-    </td>
       <td>
-      <%= message.chat_id %>
-      </td>
-      <td>
-      <%= message.user_id %>
+      <%= message.chat.sender.firstname %>
       </td>
         <td>
       <%= message.body %>
       </td>
+        <td>
+      <%= message.chat_id %>
+      </td>
       <td>
-        <%= link_to 'Ver', message_path(message) %>
+        <%= link_to 'Ver', message_path(message), class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Editar', edit_message_path(message), class: "btn btn-primary btn-sm" %>
       </td>
     </tr>

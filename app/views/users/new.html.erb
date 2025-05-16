@@ -1,20 +1,30 @@
+ <div class="container mt-4">
+ <div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
+  <div class="card-header">Crear usuario</div>
+  <div class="card-body">
+    <p class="card-text">
 <%= form_with(model: @user, local: true) do |form| %>
     <div>
-    <%= form.label :firstname, "Nombre" %>
+    <strong> <%= form.label :firstname, "Nombre" %> </strong>
     <%= form.text_field :firstname, placeholder: "Escribe aqui tu nombre" %>
     </div>
 
     <div>
-    <%= form.label :lastname, "Apellido" %>
+    <strong> <%= form.label :lastname, "Apellido" %> </strong>
     <%= form.text_field :lastname, placeholder: "Escribe aqui tu apellido" %>
     </div>
 
     <div>
-    <%= form.label :email, "Email" %>
+    <strong> <%= form.label :email, "Email" %> </strong> <br>
     <%= form.email_field :email, placeholder: "Escribe aqui tu email" %>
     </div>
-
+    <br>
     <div>
-    <%= form.submit "Guardar" %>
+    <%= form.submit "Guardar", class: "btn btn-primary btn-sm", id: "liveAlertBtn" %>
+    <%= link_to 'Volver', users_path, class: "btn btn-primary btn-sm" %>
     </div>
     <% end %>
+    <p>
+    </div>
+    </div>
+    </div>

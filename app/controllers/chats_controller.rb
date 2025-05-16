@@ -5,6 +5,7 @@ class ChatsController < ApplicationController
     
     def show
         @chat = Chat.find(params[:id])
+        @messages = @chat.messages
     end
 
     def new
@@ -33,6 +34,19 @@ class ChatsController < ApplicationController
             render json: users
         else 
             render json: [], status: :not_found
+        end
+    end
+
+    def edit
+        @chat = Chat.find(params[:id])
+    end
+
+    def update
+        @chat = Chat.find(params[:id])
+        if @chat.update(chat_params)
+            redirect_to @chat, notice: "Chat actualizado correctamente."
+        else
+            render :edit
         end
     end
 

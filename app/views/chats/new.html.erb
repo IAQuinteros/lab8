@@ -1,15 +1,24 @@
+ <div class="container mt-4">
+ <div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
+  <div class="card-header">Crear Chat</div>
+  <div class="card-body">
+    <p class="card-text">
 <%= form_with(model: @chat, local:true) do |f| %>
 <div>
     <p>
-        <%= f.label :sender_id, "Remitente" %> <br>
-        <%= f.select :sender_id, User.all.map { |u| [u.email, u.id]} %>
+        <strong> <%= f.label :sender_id, "Remitente" %> </strong> <br>
+        <%= f.select :sender_id, User.all.map { |u| [u.firstname, u.id]} %>
     </p>
 
     <p>
-        <%= f.label :receiver_id, "Receptor" %> <br>
-        <%= f.select :receiver_id, User.all.map { |u| [u.email, u.id]} %>
+        <strong> <%= f.label :receiver_id, "Receptor" %> </strong> <br>
+        <%= f.select :receiver_id, User.all.map { |u| [u.firstname, u.id]} %>
     </p>
 
-    <%= f.submit "Crear chat" %>
+    <%= f.submit "Crear chat", class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Volver', chats_path, class: "btn btn-primary btn-sm" %>
 </div>
 <% end %>
+</p>
+</div>
+</div>

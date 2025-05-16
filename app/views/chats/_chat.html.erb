@@ -1,15 +1,12 @@
     <tr>
-    <td>
-    
-    <%= index + 1 %>
-    </td>
       <td>
-      <%= chat.sender_id %>
+      <%= chat.sender.firstname %>
       </td>
       <td>
-      <%= chat.receiver_id %>
+      <%= chat.receiver.firstname %>
       </td>
       <td>
-        <%= link_to 'Ver', chat_path(chat) %>
+        <%= link_to 'Ver', chat_path(chat), class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Editar', edit_chat_path(chat), class: "btn btn-primary btn-sm" %>
       </td>
     </tr>

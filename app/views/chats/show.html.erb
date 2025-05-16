@@ -1,9 +1,8 @@
-    <td>
-<%= link_to 'Add new chat', new_chat_path %>
-</td>
-<br>
-<br>
-<h1 class="position-absolute top-0 start-50 translate-middle-x">Id's de usuarios</h1>
+ <div class="container mt-4">
+
+<br><br>
+
+<h1 class="position-absolute top-0 start-50 translate-middle-x">Detalle del chat</h1>
 <br>
 <br>
 <div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
@@ -12,20 +11,33 @@
     <p class="card-text">
     
 <p>
-<strong>Id remitente: </strong>
-<%= @chat.sender_id %>
+<strong>Remitente: </strong>
+<%= @chat.sender.firstname %>
 </p>
 
 <p>
-<strong>Id receptor: </strong>
-<%= @chat.receiver_id %>
+<strong>Receptor: </strong>
+<%= @chat.receiver.firstname %>
 </p>
 
+<p>
+<strong>ID chat asociado: </strong>
+<%= @chat.id %>
+</p>
+
+<h3>Mensajes del chat:</h3>
+<ul>
+  <% @messages.each do |message| %>
+      <strong>Contenido:</strong> <%= message.body %>
+  <% end %>
+</ul>
+
 <td>
-<%= link_to 'Volver', chats_path %>
+<%= link_to 'Volver', chats_path, class: "btn btn-primary btn-sm" %>
 </td>
 
    </p>
 
+  </div>
   </div>
   </div>

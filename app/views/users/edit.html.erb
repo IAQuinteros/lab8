@@ -1,0 +1,30 @@
+ <div class="container mt-4">
+ <div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
+  <div class="card-header">Crear Usuario</div>
+  <div class="card-body">
+    <p class="card-text">
+<%= form_with(model: @user, local: true) do |form| %>
+    <div>
+    <strong> <%= form.label :firstname, "Editar nombre" %> </strong>
+    <%= form.text_field :firstname, placeholder: "Escribe aqui nuevo nombre" %>
+    </div>
+
+    <div>
+    <strong> <%= form.label :lastname, "Editar apellido" %> </strong>
+    <%= form.text_field :lastname, placeholder: "Escribe aqui nuevo apellido" %>
+    </div>
+
+    <div>
+    <strong> <%= form.label :email, "Editar email" %> </strong>
+    <%= form.email_field :email, placeholder: "Escribe aqui nuevo email" %>
+    </div>
+    <br>
+    <div>
+    <%= form.submit "Actualizar", class: "btn btn-primary btn-sm"%>
+    <%= link_to 'Volver', users_path, class: "btn btn-primary btn-sm" %>
+    </div>
+<% end %>
+</p>
+</div>
+</div>
+</div>

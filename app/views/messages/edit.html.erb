@@ -1,0 +1,27 @@
+ <div class="container mt-4">
+ <div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
+  <div class="card-header">Crear Usuario</div>
+  <div class="card-body">
+    <p class="card-text">
+<%= form_with(model: @message, local: true) do |form| %>
+    
+    <strong>Chat ID: </strong>
+    <p><%= @message.chat_id %></p>
+
+    <strong>Nombre del remitente:</strong>
+    <p><%= @message.chat.sender.firstname %></p>
+
+    <div>
+    <strong> <%= form.label :body, "Editar comentario" %> </strong>
+    <%= form.text_area :body, placeholder: "Escribe aqui nuevo email" %>
+    </div>
+    <br>
+    <div>
+    <%= form.submit "Actualizar", class: "btn btn-primary btn-sm" %>
+    <%= link_to 'Volver', messages_path, class: "btn btn-primary btn-sm" %>
+    </div>
+<% end %>
+</p>
+</div>
+</div>
+</div>

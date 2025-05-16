@@ -1,0 +1,25 @@
+ <div class="container mt-4">
+ <div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
+  <div class="card-header">Editar chat</div>
+  <div class="card-body">
+    <p class="card-text">
+<%= form_with(model: @chat, local: true) do |form| %>
+    
+    <div>
+    <strong> <%= form.label :sender_id, "Editar autor (Id)" %> </strong>
+    <%= form.text_field :sender_id, placeholder: "Escribe aqui nuevo autor" %>
+    </div>
+
+    <div>
+    <strong> <%= form.label :receiver_id, "Editar receptor (Id)" %> </strong>
+    <%= form.text_field :receiver_id, placeholder: "Escribe aqui nuevo receptor" %>
+    </div>
+    <div>
+    <%= form.submit "Actualizar", class: "btn btn-primary btn-sm" %>
+    <%= link_to 'Volver', chats_path, class: "btn btn-primary btn-sm" %>
+    </div>
+<% end %>
+</p>
+</div>
+</div>
+</div>

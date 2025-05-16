@@ -1,7 +1,4 @@
     <tr>
-    <td>
-    <%= index + 1 %>
-    </td>
       <td>
       <%= user.firstname %>
       </td>
@@ -11,7 +8,11 @@
       <td>
       <%= user.email %>
       </td>
+        <td>
+        <%= user.messages_count %>
+        </td>
       <td>
-        <%= link_to 'Ver', user_path(user) %>
+        <%= link_to 'Ver', user_path(user), class: "btn btn-primary btn-sm" %>
+        <%= link_to 'Editar', edit_user_path(user), class: "btn btn-primary btn-sm" %>
       </td>
     </tr>

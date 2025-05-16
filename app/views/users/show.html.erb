@@ -1,35 +1,44 @@
-    <td>
-<%= link_to 'Add new user', new_user_path %>
-</td>
+ <div class="container mt-4">
 
-<br>
-<br>
+<br><br>
+
 <h1 class="position-absolute top-0 start-50 translate-middle-x">Detalles del usuario</h1>
-<br>
-<br>
+
+<br><br>
+
 <div class="card text-bg-light mb-3 mx-auto" style="max-width: 18rem;">
-  <div class="card-header">Informacion</div>
+  <div class="card-header">Información</div>
   <div class="card-body">
     <p class="card-text">
+      <strong>Nombre: </strong>
+      <%= @user.firstname %> 
+      <br>
+      <strong>Apellido: </strong>
+      <%= @user.lastname %>
+    </p>
     
+    <p><strong>Chats en los que participa:</strong></p>
+    <ul>
+      <% @chats.each do |chat| %>
+        <% user_messages = chat.messages.where(user_id: @user.id) %>
+        <% if user_messages.any? %>
+          <li>
+            <strong>ID del chat:</strong> <%= chat.id %>
+            <ul>
+              <% user_messages.each do |message| %>
+                <li>Mensaje ID: <%= message.id %> </li> 
+                <li>Contenido: <%= message.body %></li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
     <p>
-<strong>Nombre: </strong>
-<%= @user.firstname %>
-</p>
-
-<p>
-<strong>Apellido: </strong>
-<%= @user.lastname %>
-</p>
-
-<p>
-<strong>Email: </strong>
-<%= @user.email %>
-</p>
-
-<td>
-<%= link_to 'Volver', users_path %>
-</td>
-</p>
+      <%= link_to 'Editar', edit_user_path, class: "btn btn-primary btn-sm" %>
+      <%= link_to 'Volver', users_path, class: "btn btn-primary btn-sm" %>
+    </p>
   </div>
-  </div>
+</div>
+</div>
